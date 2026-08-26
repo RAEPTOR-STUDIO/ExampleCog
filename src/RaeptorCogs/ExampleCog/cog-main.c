@@ -1,7 +1,7 @@
+#include <RaeptorCogs/Cog/function_registry.h>
+#include <RaeptorCogs/Cog/info.h>
 #include <stdio.h>
 
-const char *cog_version() { return "1.0.0"; }
-const char *cog_name() { return "ExampleCog"; }
 void logger_log(FILE *out, const char *message) {
   fputc('[', out);
   fputs(cog_name(), out);
@@ -9,3 +9,7 @@ void logger_log(FILE *out, const char *message) {
   fputs(message, out);
   fputc('\n', out);
 }
+
+void cog_on_attach(void) {
+  fn_registry->bind("logger_log", (void *)logger_log);
+};
